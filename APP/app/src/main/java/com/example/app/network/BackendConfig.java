@@ -133,13 +133,13 @@ public final class BackendConfig {
     /**
      * Trả về root URL dạng http://host:port/
      *
-     * Emulator  → http://10.0.2.2:8000/
-     * Máy thật  → Sử dụng BuildConfig.BASE_URL
+     * Emulator  → http://103.75.182.180:8000/ (VPS IP)
+     * Máy thật  → Sử dụng BuildConfig.BASE_URL (VPS IP)
      */
     public static String baseRoot() {
         String url;
         if (isEmulator()) {
-            url = "http://10.0.2.2:8000/";
+            url = "http://103.75.182.180:8000/";
         } else {
             url = com.example.app.BuildConfig.BASE_URL;
         }

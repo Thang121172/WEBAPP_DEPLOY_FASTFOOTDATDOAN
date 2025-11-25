@@ -1,0 +1,39 @@
+# Cấu hình Render Blueprint cho dự án FastFood Django
+# LƯU Ý: 
+# - PostgreSQL Database cần tạo THỦ CÔNG trước
+# - Migration sẽ chạy thủ công qua Shell sau khi deploy
+
+services:
+  # Dịch vụ Web Django/DRF (Nơi ứng dụng của bạn chạy)
+  - type: web
+    name: fastfood-backend
+    env: python
+    plan: free 
+    
+    # Lệnh Build: Cài đặt dependencies và thu thập static files
+    buildCommand: "cd backend && pip install -r requirements.txt && python manage.py collectstatic --noinput"
+      
+    # Lệnh Start Command: Sử dụng core.wsgi:application
+    # Render tự động set $PORT, không cần khai báo port trong yaml
+    startCommand: "cd backend && gunicorn core.wsgi:application --bind 0.0.0.0:$PORT"
+    
+    envVars:
+      # DATABASE_URL - Cần thêm MANUAL sau khi tạo PostgreSQL database
+      # Vào service này → Environment → Thêm DATABASE_URL = Internal Database URL từ PostgreSQL service
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENVIRONMENT
+        value: Production
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings.prod
+      # URL của Render Service
+      - key: RENDER_EXTERNAL_HOSTNAME
+        fromService:
+          type: web
+          name: fastfood-backend
+          property: host
+      # CORS - Thêm domain Netlify sau khi deploy
+      # Vào Environment → Thêm: CORS_ORIGINS=https://your-netlify-site.netlify.app
+      # CELERY BROKER URL (Nếu bạn dùng Celery, hãy thêm URL Redis tại đây)
+      - key: CELERY_BROKER_URL
+        value: ""

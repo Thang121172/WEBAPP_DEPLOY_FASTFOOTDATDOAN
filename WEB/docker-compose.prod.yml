@@ -1,0 +1,203 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # POSTGRESQL DATABASE SERVICE
+  # ----------------------------------------------------
+  db:
+    image: postgres:15
+    container_name: fastfood_db_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fastfood}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-fastfood}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fastfood_network
+
+  # ----------------------------------------------------
+  # REDIS CACHE/BROKER SERVICE
+  # ----------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: fastfood_redis_prod
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-}"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - fastfood_network
+
+  # ----------------------------------------------------
+  # DJANGO BACKEND SERVICE
+  # ----------------------------------------------------
+  backend:
+    container_name: fastfood_backend_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    environment:
+      DJANGO_SETTINGS_MODULE: core.settings.prod
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-fastfood}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-fastfood}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    volumes:
+      - ./backend:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    working_dir: /app/backend
+    command: >
+      sh -c "
+        /usr/bin/wait-for-it db:5432 --timeout=30 --strict -- echo 'PostgreSQL is up and running.' &&
+        python manage.py migrate --noinput &&
+        python manage.py collectstatic --noinput &&
+        gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120 --access-logfile - --error-logfile -
+      "
+    networks:
+      - fastfood_network
+    restart: unless-stopped
+
+  # ----------------------------------------------------
+  # CELERY WORKER SERVICE
+  # ----------------------------------------------------
+  celery_worker:
+    container_name: fastfood_celery_worker_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+      - redis
+      - db
+    env_file:
+      - .env
+    environment:
+      DJANGO_SETTINGS_MODULE: core.settings.prod
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-fastfood}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    volumes:
+      - ./backend:/app
+    working_dir: /app/backend
+    command: >
+      sh -c "
+        /usr/bin/wait-for-it db:5432 --timeout=30 --strict -- echo 'PostgreSQL is up and running for worker.' &&
+        celery -A core.celery_app worker --loglevel=INFO --concurrency=2
+      "
+    networks:
+      - fastfood_network
+    restart: unless-stopped
+
+  # ----------------------------------------------------
+  # CELERY BEAT SCHEDULER
+  # ----------------------------------------------------
+  celery_beat:
+    container_name: fastfood_celery_beat_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+      - redis
+      - db
+    env_file:
+      - .env
+    environment:
+      DJANGO_SETTINGS_MODULE: core.settings.prod
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-fastfood}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    volumes:
+      - ./backend:/app
+    working_dir: /app/backend
+    command: >
+      sh -c "
+        /usr/bin/wait-for-it db:5432 --timeout=30 --strict -- echo 'PostgreSQL is up and running for beat.' &&
+        celery -A core.celery_app beat --loglevel=INFO
+      "
+    networks:
+      - fastfood_network
+    restart: unless-stopped
+
+  # ----------------------------------------------------
+  # FRONTEND SERVICE (Production Build)
+  # ----------------------------------------------------
+  frontend:
+    container_name: fastfood_frontend_prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    environment:
+      VITE_API_BASE: ${VITE_API_BASE:-/api}
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+    networks:
+      - fastfood_network
+    restart: unless-stopped
+
+  # ----------------------------------------------------
+  # NGINX REVERSE PROXY
+  # ----------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: fastfood_nginx_prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - static_volume:/static:ro
+      - media_volume:/media:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - fastfood_network
+    restart: unless-stopped
+
+# ----------------------------------------------------
+# NETWORKS
+# ----------------------------------------------------
+networks:
+  fastfood_network:
+    driver: bridge
+
+# ----------------------------------------------------
+# VOLUMES
+# ----------------------------------------------------
+volumes:
+  postgres_data:
+  redis_data:
+  static_volume:
+  media_volume:
+

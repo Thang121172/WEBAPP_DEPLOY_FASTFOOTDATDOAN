@@ -1,0 +1,25 @@
+/*
+ * Tailwind CSS Directives
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Cấu hình Font Inter
+ * Áp dụng font Inter làm font chữ chính cho toàn bộ body.
+ * Fallback về font hệ thống nếu Inter không tải được.
+ */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #1f2937; /* Default text color: gray-800 */
+    background-color: #f9fafb; /* Default background: gray-50 */
+}
+
+/* * Cấu hình cho container chung (giúp căn giữa nội dung)
+ */
+.container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}

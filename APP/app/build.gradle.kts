@@ -17,8 +17,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // BASE_URL cho app - Cập nhật IP mạng Wi-Fi
-        buildConfigField("String","BASE_URL","\"http://192.168.1.130:8000/\"")
+        // BASE_URL cho app - VPS IP
+        buildConfigField("String","BASE_URL","\"http://103.75.182.180:8000/\"")
     }
 
     buildTypes {
@@ -28,10 +28,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String","BASE_URL","\"http://192.168.1.130:8000/\"")
+            buildConfigField("String","BASE_URL","\"http://103.75.182.180:8000/\"")
         }
         debug {
-            buildConfigField("String","BASE_URL","\"http://192.168.1.130:8000/\"")
+            buildConfigField("String","BASE_URL","\"http://103.75.182.180:8000/\"")
         }
     }
 

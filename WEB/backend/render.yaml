@@ -1,0 +1,68 @@
+# Cấu hình Render Blueprint cho dự án FastFood Django
+# File này định nghĩa Database, Web Service (Django) và Migration Job.
+services:
+  # 1. Dịch vụ Cơ sở dữ liệu PostgreSQL
+  - type: postgres
+    name: fastfood-db
+    plan: free 
+    databaseName: fastfood_db
+    user: fastfood_user
+
+  # 2. Dịch vụ Web Django/DRF (Nơi ứng dụng của bạn chạy)
+  - type: web
+    name: fastfood-backend
+    env: python
+    plan: free 
+    
+    # Lệnh Build: Cài đặt dependencies và thu thập static files
+    buildCommand: "cd backend && pip install -r requirements.txt && python manage.py collectstatic --noinput"
+      
+    # Lệnh Start Command: Sử dụng core.wsgi:application
+    startCommand: "cd backend && gunicorn core.wsgi:application --bind 0.0.0.0:$PORT"
+    
+    port: 8000
+    
+    envVars:
+      # Tự động kết nối với DB
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fastfood-db
+          property: connectionString
+      # Tự động tạo SECRET_KEY
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENVIRONMENT
+        value: Production
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings.prod
+      # URL của Render Service
+      - key: RENDER_EXTERNAL_HOSTNAME
+        fromService:
+          type: web
+          name: fastfood-backend
+          property: host
+      # CELERY BROKER URL (Nếu bạn dùng Celery, hãy thêm URL Redis tại đây)
+      - key: CELERY_BROKER_URL
+        value: ""
+
+  # 3. Dịch vụ Job để chạy Migration (Lựa chọn A: Tách biệt Migration)
+  - type: job
+    name: fastfood-migrate
+    env: python
+    
+    # Lệnh Build tương tự Web Service
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    
+    # Lệnh Start: Chỉ chạy migration sau khi Web Service được Deploy
+    startCommand: "cd backend && python manage.py migrate"
+    
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fastfood-db
+          property: connectionString
+      - key: SECRET_KEY
+        fromService:
+          type: web
+          name: fastfood-backend
+          envVarKey: SECRET_KEY

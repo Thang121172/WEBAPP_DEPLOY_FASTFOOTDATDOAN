@@ -1,0 +1,40 @@
+# Netlify configuration file for FastFood Frontend
+# File này được Netlify đọc khi Base directory = "frontend" trong UI
+
+[build]
+  # Command để build project
+  # Phải install dependencies trước khi build
+  command = "npm install && npm run build"
+  
+  # Thư mục chứa output sau khi build (relative to frontend/)
+  # ĐÚNG: "dist" (vì Netlify đã cd vào frontend/)
+  publish = "dist"
+
+# Redirect rules cho Single Page Application (SPA)
+# Tất cả các routes sẽ được redirect về index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers cho security và performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Headers cho static assets (cache lâu hơn)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers cho HTML files (không cache)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
