@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ff_background">
+
+    <!-- AppBarLayout for Collapsing Header -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true"
+            android:fitsSystemWindows="true">
+
+            <ImageView
+                android:id="@+id/iv_restaurant_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                tools:src="@tools:sample/backgrounds/scenic"
+                android:contentDescription="Ảnh banner nhà hàng" />
+
+            <!-- Toolbar/Navigation Bar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Content: Menu List -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Restaurant Info -->
+            <TextView
+                android:id="@+id/tv_restaurant_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Thông tin chi tiết nhà hàng: Địa chỉ, giờ mở cửa, đánh giá..."
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+            <!-- RecyclerView for Menu Items -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="10"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_menu" />
+            <!-- chú ý: nếu adapter dùng item_menu thì để đúng layout này -->
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Cart Button: nằm ở đáy màn hình -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_view_cart_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xem Giỏ Hàng (0đ)"
+        android:drawableStart="@drawable/ic_shopping_cart"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        app:iconGravity="textStart"
+        app:cornerRadius="24dp"
+        app:elevation="8dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom|center_horizontal"
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

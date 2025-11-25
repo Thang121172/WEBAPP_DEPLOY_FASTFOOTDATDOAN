@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/ff_bg">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@android:drawable/checkbox_on_background"
+        android:contentDescription="@string/otp_success_cd"
+        android:tint="@color/ff_success" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otp_success_title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otp_success_hint"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/btn_go_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/ff_success"
+        android:textColor="#ffffff"
+        android:text="@string/otp_success_go_login" />
+</LinearLayout>

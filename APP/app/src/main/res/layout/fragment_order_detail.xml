@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ff_background">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Card 1: Thông tin đơn -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/ff_surface"
+                app:strokeColor="@color/ff_border"
+                app:strokeWidth="1dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.FastFood.Medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/order_detail_fragment_label"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/ff_text_primary" />
+                    
+                    <!-- Order ID -->
+                    <TextView
+                        android:id="@+id/tv_order_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Mã đơn: -"
+                        android:textSize="14sp"
+                        android:textColor="@color/ff_text_secondary" />
+
+                    <!-- Status row: chip (icon + text) -->
+                    <LinearLayout
+                        android:id="@+id/layout_status_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="12dp"
+                        android:background="@drawable/bg_status_chip">
+
+                        <ImageView
+                            android:id="@+id/iv_status"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:tint="@color/ff_text_secondary"
+                            android:src="@drawable/ic_status_inprogress"
+                            android:contentDescription="@string/status_label" />
+
+                        <!-- GIỮ ID CŨ: tv_status -->
+                        <TextView
+                            android:id="@+id/tv_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="Trạng thái: -"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:textColor="@color/ff_text_secondary" />
+                    </LinearLayout>
+
+                    <!-- Shipper Info -->
+                    <LinearLayout
+                        android:id="@+id/layout_shipper_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                        
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/shipper_label"
+                            android:textStyle="bold"
+                            android:textColor="@color/ff_text_primary"
+                            android:textSize="14sp" />
+                        
+                        <TextView
+                            android:id="@+id/tv_shipper_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text=""
+                            android:textColor="@color/ff_text_secondary"
+                            android:textSize="14sp" />
+                        
+                        <TextView
+                            android:id="@+id/tv_shipper_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text=""
+                            android:textColor="@color/ff_text_secondary"
+                            android:textSize="14sp" />
+                        
+                        <TextView
+                            android:id="@+id/tv_shipper_vehicle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text=""
+                            android:textColor="@color/ff_text_secondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    
+                    <!-- Shipper (fallback - giữ lại để tương thích) -->
+                    <TextView
+                        android:id="@+id/tv_shipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/shipper_label"
+                        android:textColor="@color/ff_text_primary"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <!-- Accept Order Button (for shipper) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_accept_order"
+                        style="@style/Widget.FastFood.Button.Primary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Nhận đơn"
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
+
+                    <!-- Confirm Delivered Button (for shipper) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_confirm_delivered"
+                        style="@style/Widget.FastFood.Button.Primary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Xác nhận đã giao"
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
+
+                    <!-- Open Maps Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_open_maps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/open_in_maps"
+                        android:textAllCaps="false"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 2: Danh sách món -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/ff_surface"
+                app:strokeColor="@color/ff_border"
+                app:strokeWidth="1dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.FastFood.Medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- GIỮ ID CŨ: tv_order -->
+                    <TextView
+                        android:id="@+id/tv_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tóm tắt đơn hàng"
+                        android:textStyle="bold"
+                        android:textColor="@color/ff_text_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Danh sách món:"
+                        android:textColor="@color/ff_text_secondary" />
+
+                    <!-- GIỮ ID CŨ: rv_items -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card 3: Lịch sử trạng thái -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/ff_surface"
+                app:strokeColor="@color/ff_border"
+                app:strokeWidth="1dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.FastFood.Medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lịch sử:"
+                        android:textStyle="bold"
+                        android:textColor="@color/ff_text_primary"
+                        android:textSize="16sp" />
+
+                    <!-- GIỮ ID CŨ: rv_history -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

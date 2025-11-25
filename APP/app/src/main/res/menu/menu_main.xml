@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Mục Cài đặt (Hiển thị nếu có đủ chỗ) -->
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom">
+        <menu>
+            <!-- Hồ sơ (chỉ hiển thị cho shipper) -->
+            <item
+                android:id="@+id/action_profile"
+                android:title="Hồ sơ"
+                android:icon="@android:drawable/ic_menu_myplaces"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <!-- Mục Đăng xuất (Luôn nằm trong menu 3 chấm) -->
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="101"
+        android:title="@string/action_logout"
+        app:showAsAction="never" />
+</menu>

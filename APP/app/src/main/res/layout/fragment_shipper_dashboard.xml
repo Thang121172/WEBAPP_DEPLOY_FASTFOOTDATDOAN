@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ff_background">
+
+    <!-- Tabs: Available | Assigned | Delivering | Completed -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/ff_surface"
+        app:tabIndicatorColor="@color/ff_green"
+        app:tabSelectedTextColor="@color/ff_green"
+        app:tabTextColor="@color/ff_text_secondary"
+        app:tabMode="scrollable"
+        app:tabGravity="fill"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layout_action_buttons"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Action buttons container -->
+    <LinearLayout
+        android:id="@+id/layout_action_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@id/tab_status"
+        app:layout_constraintBottom_toBottomOf="@id/tab_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp">
+
+        <!-- Profile button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_profile"
+            style="@style/Widget.FastFood.Button.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Hồ sơ"
+            android:textAllCaps="false"
+            app:icon="@android:drawable/ic_menu_myplaces"
+            app:iconGravity="start"
+            app:iconPadding="6dp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Revenue button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_revenue"
+            style="@style/Widget.FastFood.Button.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Doanh thu"
+            android:textAllCaps="false"
+            app:icon="@android:drawable/ic_menu_recent_history"
+            app:iconGravity="start"
+            app:iconPadding="6dp"/>
+    </LinearLayout>
+
+    <!-- Pull to refresh wrapper -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tab_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Empty state -->
+            <LinearLayout
+                android:id="@+id/layout_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:layout_gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:tint="@color/ff_text_muted"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_nothing_here"
+                    android:textColor="@color/ff_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Available orders -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_available"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <!-- Delivering now -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_delivering"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <!-- Completed -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_completed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

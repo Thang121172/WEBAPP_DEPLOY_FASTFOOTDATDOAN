@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- 1. Cột Thông tin món ăn (Tên, Mô tả, Giá) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="12dp">
+
+            <!-- Tên món ăn -->
+            <TextView
+                android:id="@+id/tv_menu_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Cơm tấm sườn bì chả đặc biệt (Size lớn)" />
+
+            <!-- Mô tả ngắn -->
+            <TextView
+                android:id="@+id/tv_menu_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textSize="13sp"
+                android:textColor="@android:color/darker_gray"
+                tools:text="Thịt sườn heo nướng thơm lừng, ăn kèm bì chả, trứng ốp la và nước mắm truyền thống." />
+
+            <!-- Giá tiền -->
+            <TextView
+                android:id="@+id/tv_menu_item_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="15sp"
+                android:textColor="@color/design_default_color_primary"
+                android:textStyle="bold"
+                tools:text="45.000 đ" />
+
+            <!-- Nút Thêm/Mua ngay (Dùng cho món không có tùy chọn) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:text="Thêm"
+                app:icon="@drawable/ic_add"
+                app:iconGravity="textStart"
+                app:cornerRadius="18dp"
+                android:paddingHorizontal="16dp"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <!-- 2. Cột Ảnh món ăn -->
+        <ImageView
+            android:id="@+id/iv_menu_item_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            app:cornerRadius="8dp"
+            android:background="@color/ff_placeholder"
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="Ảnh món ăn" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

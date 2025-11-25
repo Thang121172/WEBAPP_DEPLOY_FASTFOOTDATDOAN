@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/ff_green</color>
+    <color name="colorPrimaryDark">@color/ff_green_dark</color>
+    <color name="colorAccent">@color/ff_green_light</color>
+    <color name="bg_light">@color/ff_background</color>
+    <color name="ff_green">#27AE60</color>
+    <color name="ff_green_dark">#1E8F50</color>
+    <color name="ff_green_light">#4CD787</color>
+
+    <color name="ff_background">#F9FBF9</color>
+    <color name="ff_surface">#FFFFFF</color>
+    <color name="ff_border">#E6EDE9</color>
+    <color name="ff_bg">@color/ff_background</color>
+
+    <color name="ff_text_primary">#0F172A</color>
+    <color name="ff_text_secondary">#475569</color>
+    <color name="ff_text_muted">#94A3B8</color>
+
+    <color name="ff_error">#E11D48</color>
+    <color name="ff_warning">#F59E0B</color>
+    <color name="ff_success">#16A34A</color>
+    <color name="ff_info">#0EA5E9</color>
+
+    <color name="ff_ripple_dark">#1A000000</color>
+    <color name="ff_ripple_light">#14FFFFFF</color>
+
+    <color name="ff_divider">#E5E7EB</color>
+
+    <color name="ff_link">#1E88E5</color>
+
+    <color name="ff_primary">#27AE60</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <color name="ff_status_warning">@color/ff_warning</color>
+    <color name="ff_status_error">@color/ff_error</color>
+    <color name="ff_status_info">@color/ff_info</color>
+    <color name="ff_status_success">@color/ff_success</color>
+    <color name="ff_highlight">@color/ff_primary</color>
+
+    <color name="ff_placeholder">#E0E0E0</color>
+</resources>

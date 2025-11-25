@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ff_background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/customer_orders_title"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@android:color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_customer_order" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_orders"
+        android:textSize="16sp"
+        android:textColor="@color/ff_text_secondary"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

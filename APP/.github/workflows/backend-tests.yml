@@ -1,0 +1,66 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: 123456
+          POSTGRES_DB: fastfood
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U app -d fastfood" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      working-directory: backend
+      run: npm install
+
+    - name: Run migrations
+      working-directory: backend
+      run: node migrate.js
+
+    - name: Start backend (background)
+      working-directory: backend
+      run: |
+        PORT=8082 ALLOW_SMOKE_SEED=true DB_HOST=localhost DB_PORT=5433 DB_NAME=fastfood DB_USER=app DB_PASSWORD=123456 node index.js &
+        sleep 3
+
+    - name: Run smoke test
+      working-directory: backend
+      env:
+        BASE: http://localhost:8082
+        SMOKE_DB_HOST: localhost
+        SMOKE_DB_PORT: 5433
+        SMOKE_DB_NAME: fastfood
+        SMOKE_DB_USER: app
+        SMOKE_DB_PASS: 123456
+      run: node tests/smoke.js
+
+    - name: Run refund test
+      working-directory: backend
+      env:
+        BASE: http://localhost:8082
+        SMOKE_DB_HOST: localhost
+        SMOKE_DB_PORT: 5433
+        SMOKE_DB_NAME: fastfood
+        SMOKE_DB_USER: app
+        SMOKE_DB_PASS: 123456
+      run: node tests/refund_test.js

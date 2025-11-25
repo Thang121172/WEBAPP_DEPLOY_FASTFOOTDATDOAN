@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/ff_background"
+    tools:context=".HomeFragment">
+
+    <!-- Nút Đăng Xuất (ĐẶT TRƯỚC để hiển thị ở góc trên bên phải) -->
+    <ImageButton
+        android:id="@+id/btn_logout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_logout"
+        app:tint="@color/ff_text_primary"
+        android:contentDescription="Đăng xuất"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Chào user (được căn chỉnh bên trái, bị giới hạn bởi nút Logout) -->
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Xin chào"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/ff_text_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_logout"
+        android:layout_marginEnd="8dp"
+        tools:text="Xin chào user@example.com (customer)"/>
+
+    <!-- Trạng thái vị trí / API -->
+    <TextView
+        android:id="@+id/tv_location_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Đang xác định vị trí..."
+        android:textColor="@color/ff_text_secondary"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+        app:layout_constraintStart_toStartOf="@id/tv_welcome"
+        app:layout_constraintEnd_toEndOf="@id/tv_welcome"/>
+
+    <!-- Đơn hàng gần đây -->
+    <TextView
+        android:id="@+id/tv_recent_orders_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đơn gần đây"
+        android:textStyle="bold"
+        android:textColor="@color/ff_text_primary"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_location_status"
+        app:layout_constraintStart_toStartOf="@id/tv_location_status"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_orders"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_recent_orders_label"
+        app:layout_constraintStart_toStartOf="@id/tv_recent_orders_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clipToPadding="false"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <!-- Menu gợi ý -->
+    <TextView
+        android:id="@+id/tv_menu_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gợi ý cho bạn"
+        android:textStyle="bold"
+        android:textColor="@color/ff_text_primary"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/recycler_orders"
+        app:layout_constraintStart_toStartOf="@id/recycler_orders"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_menu_label"
+        app:layout_constraintStart_toStartOf="@id/tv_menu_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_checkout"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_checkout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Thanh toán demo"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintStart_toStartOf="@id/tv_menu_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

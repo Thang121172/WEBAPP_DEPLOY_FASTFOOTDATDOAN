@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_order_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đơn #12345"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+
+        <TextView
+            android:id="@+id/tv_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Khách hàng"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhà hàng"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0₫"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#27AE60"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lý do: ..."
+            android:textSize="14sp"
+            android:textColor="#E74C3C"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ: ..."
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày đặt: ..."
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_marginTop="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btn_reject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Từ chối"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#95A5A6"
+                android:layout_marginEnd="8dp"
+                android:minWidth="100dp"/>
+
+            <Button
+                android:id="@+id/btn_approve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duyệt hủy"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#E74C3C"
+                android:minWidth="100dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+

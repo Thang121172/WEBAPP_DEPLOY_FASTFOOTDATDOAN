@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên món ăn"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines="3"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá (đ)"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Ảnh sản phẩm -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ảnh sản phẩm"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:textSize="14sp"/>
+
+    <!-- ImageView preview -->
+    <ImageView
+        android:id="@+id/img_preview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="@android:color/darker_gray"
+        android:contentDescription="Preview ảnh sản phẩm"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"/>
+
+    <!-- Button chọn ảnh -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_select_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chọn ảnh từ thư viện"
+        android:layout_marginBottom="8dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hoặc nhập URL ảnh:"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="4dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL ảnh (tùy chọn)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_image_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
+

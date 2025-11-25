@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/ff_surface">
+
+    <!-- Row nội dung -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:foreground="?attr/selectableItemBackground">
+
+        <!-- Tên món -->
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Item title"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/ff_text_primary" />
+
+        <!-- Số lượng dạng chip nhỏ -->
+        <TextView
+            android:id="@+id/tv_item_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:minWidth="36dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="x1"
+            android:textSize="13sp"
+            android:textColor="@color/ff_text_secondary"
+            android:background="@drawable/bg_status_chip" />
+
+        <!-- Giá, căn phải -->
+        <TextView
+            android:id="@+id/tv_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="0 đ"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/ff_green" />
+    </LinearLayout>
+
+    <!-- Divider mảnh -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/ff_divider" />
+</LinearLayout>

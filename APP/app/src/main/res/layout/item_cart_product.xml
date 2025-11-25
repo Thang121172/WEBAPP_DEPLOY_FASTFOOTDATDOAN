@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="@color/ff_surface">
+
+        <!-- Hình ảnh sản phẩm -->
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_product"
+            android:background="@drawable/bg_image_rounded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="Hình ảnh sản phẩm"/>
+
+        <!-- Tên sản phẩm -->
+        <TextView
+            android:id="@+id/text_product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:text="Cải bó xôi hữu cơ tươi sạch"
+            android:textColor="@color/ff_text_primary"
+            android:textSize="16sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="@+id/img_product"
+            app:layout_constraintStart_toEndOf="@+id/img_product"
+            app:layout_constraintEnd_toStartOf="@+id/btn_remove_item"/>
+
+        <!-- Giá sản phẩm -->
+        <TextView
+            android:id="@+id/text_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="25.000đ / 500g"
+            android:textColor="@color/ff_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/text_product_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_product_name"/>
+
+        <!-- Nút Xóa (tạm thời sử dụng icon thùng rác) -->
+        <ImageView
+            android:id="@+id/btn_remove_item"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_delete_line"
+            android:tint="@color/ff_text_muted"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Xóa sản phẩm khỏi giỏ"/>
+
+        <!-- Bộ điều chỉnh số lượng -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_product_name">
+
+            <!-- Nút giảm số lượng -->
+            <ImageView
+                android:id="@+id/btn_minus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:background="@drawable/bg_quantity_button"
+                android:src="@drawable/ic_minus_line"
+                android:tint="@color/ff_text_primary"
+                android:contentDescription="Giảm số lượng"/>
+
+            <!-- Số lượng hiện tại -->
+            <TextView
+                android:id="@+id/text_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="@color/ff_text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="12dp"/>
+
+            <!-- Nút tăng số lượng -->
+            <ImageView
+                android:id="@+id/btn_plus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:background="@drawable/bg_quantity_button"
+                android:src="@drawable/ic_plus_line"
+                android:tint="@color/ff_text_primary"
+                android:contentDescription="Tăng số lượng"/>
+
+        </LinearLayout>
+
+        <!-- Tổng tiền cho item này -->
+        <TextView
+            android:id="@+id/text_item_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50.000đ"
+            android:textColor="@color/ff_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

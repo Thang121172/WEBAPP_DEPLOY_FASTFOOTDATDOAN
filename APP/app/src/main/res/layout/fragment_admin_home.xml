@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F5F5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/tv_admin_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bảng điều khiển Admin"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Stats Grid -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_total_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_admin_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_cancel_requests"
+            app:layout_constraintHorizontal_chainStyle="spread">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_total_orders_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="#27AE60"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng đơn hàng"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_cancel_requests"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_admin_title"
+            app:layout_constraintStart_toEndOf="@id/card_total_orders"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_cancel_requests_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="#E74C3C"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yêu cầu hủy"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_revenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/card_total_orders"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_users"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_revenue_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0₫"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#3498DB"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doanh thu"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_users"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/card_total_orders"
+            app:layout_constraintStart_toEndOf="@id/card_revenue"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_users_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:textColor="#9B59B6"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Người dùng"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Quick Actions -->
+        <TextView
+            android:id="@+id/tv_quick_actions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Thao tác nhanh"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintTop_toBottomOf="@id/card_revenue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Manage Orders Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_manage_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_quick_actions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quản lý đơn hàng"
+                    android:textSize="16sp"
+                    android:textColor="#333333"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:tint="#666666"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Manage Cancel Requests Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_cancel_requests_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_manage_orders"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Duyệt yêu cầu hủy đơn"
+                    android:textSize="16sp"
+                    android:textColor="#333333"/>
+
+                <TextView
+                    android:id="@+id/tv_pending_cancel_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:background="#E74C3C"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:minWidth="24dp"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:tint="#666666"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Manage Users Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_manage_users"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_cancel_requests_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quản lý người dùng"
+                    android:textSize="16sp"
+                    android:textColor="#333333"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:tint="#666666"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- View Stats Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_manage_users"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Xem thống kê chi tiết"
+                    android:textSize="16sp"
+                    android:textColor="#333333"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:tint="#666666"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Loading indicator -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

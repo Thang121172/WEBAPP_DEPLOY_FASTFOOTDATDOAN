@@ -1,0 +1,36 @@
+{
+  "name": "fastfood-backend",
+  "version": "1.0.0",
+  "description": "FastFood API (PostgreSQL, Redis, Email OTP)",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "migrate": "node migrate.js",
+    "cleanup:tokens": "node scripts/cleanup_revoked.js",
+    "test:ci": "node scripts/run_tests_node.js",
+    "test:smoke": "node tests/smoke.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "helmet": "^7.1.0",
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.10.1",
+    "pg": "^8.16.3",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
+  }
+}

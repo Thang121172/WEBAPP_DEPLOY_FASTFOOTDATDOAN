@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.FastFood" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/ff_green</item>
+        <item name="colorPrimaryVariant">@color/ff_green_dark</item>
+        <item name="colorSecondary">@color/ff_green_light</item>
+
+        <item name="android:colorBackground">@color/ff_background</item>
+        <item name="colorBackground">@color/ff_background</item>
+        <item name="colorSurface">@color/ff_surface</item>
+
+        <item name="android:statusBarColor">@color/ff_green_dark</item>
+        <item name="android:navigationBarColor">@color/ff_surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="materialButtonStyle">@style/Widget.FastFood.Button.Primary</item>
+        <item name="textInputStyle">@style/Widget.FastFood.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.FastFood.Card</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.FastFood.Medium</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.FastFood.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.FastFood.Medium</item>
+    </style>
+</resources>

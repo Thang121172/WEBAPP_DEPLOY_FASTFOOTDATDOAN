@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F5F5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="Thống kê chi tiết"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Revenue Section -->
+        <TextView
+            android:id="@+id/tv_revenue_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Doanh thu"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_total_revenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_revenue_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng doanh thu"
+                    android:textSize="14sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_total_revenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0₫"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#27AE60"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_today_revenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_total_revenue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_completed_orders"
+            app:layout_constraintHorizontal_chainStyle="spread">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doanh thu hôm nay"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_today_revenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0₫"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#3498DB"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_completed_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_total_revenue"
+            app:layout_constraintStart_toEndOf="@id/card_today_revenue"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn đã giao"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_completed_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#27AE60"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Orders Section -->
+        <TextView
+            android:id="@+id/tv_orders_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Thống kê đơn hàng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/card_today_revenue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_orders_pending"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_orders_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_orders_confirmed"
+            app:layout_constraintHorizontal_chainStyle="spread">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PENDING"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_orders_pending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#F39C12"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_orders_confirmed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_orders_title"
+            app:layout_constraintStart_toEndOf="@id/card_orders_pending"
+            app:layout_constraintEnd_toStartOf="@id/card_orders_delivering"
+            android:layout_marginStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONFIRMED"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_orders_confirmed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#3498DB"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_orders_delivering"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_orders_title"
+            app:layout_constraintStart_toEndOf="@id/card_orders_confirmed"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DELIVERING"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_orders_delivering"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#E67E22"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_orders_delivered"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_orders_pending"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_orders_canceled"
+            app:layout_constraintHorizontal_chainStyle="spread">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DELIVERED"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_orders_delivered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#27AE60"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_orders_canceled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_orders_pending"
+            app:layout_constraintStart_toEndOf="@id/card_orders_delivered"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CANCELED"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_orders_canceled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#E74C3C"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Users Section -->
+        <TextView
+            android:id="@+id/tv_users_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Thống kê người dùng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/card_orders_delivered"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_users_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_users_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/card_users_customer"
+            app:layout_constraintHorizontal_chainStyle="spread">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng số"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_users_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_users_customer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_users_title"
+            app:layout_constraintStart_toEndOf="@id/card_users_total"
+            app:layout_constraintEnd_toStartOf="@id/card_users_merchant"
+            android:layout_marginStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khách hàng"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_users_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#3498DB"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_users_merchant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_users_title"
+            app:layout_constraintStart_toEndOf="@id/card_users_customer"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Merchant"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_users_merchant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#27AE60"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_users_shipper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_users_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipper"
+                    android:textSize="12sp"
+                    android:textColor="#666666"/>
+
+                <TextView
+                    android:id="@+id/tv_users_shipper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#E67E22"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

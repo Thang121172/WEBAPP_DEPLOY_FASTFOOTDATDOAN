@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Nền xám nhạt -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ff_border"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+    <!-- Icon FoodFresh (tượng trưng) -->
+    <item android:drawable="@drawable/ic_location"
+        android:gravity="center"
+        android:top="20dp"
+        android:bottom="20dp"
+        android:left="20dp"
+        android:right="20dp">
+        <shape android:shape="rectangle">
+            <size android:width="40dp" android:height="40dp"/>
+            <solid android:color="@color/ff_text_muted"/>
+        </shape>
+    </item>
+</layer-list>

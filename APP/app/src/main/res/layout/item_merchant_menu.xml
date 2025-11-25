@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên món"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/ff_text_primary"/>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả"
+                android:textSize="14sp"
+                android:textColor="@color/ff_text_secondary"
+                android:layout_marginTop="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 đ"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/ff_green"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit"
+                style="@style/Widget.FastFood.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sửa"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete"
+                style="@style/Widget.FastFood.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xóa"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/holo_red_dark"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+

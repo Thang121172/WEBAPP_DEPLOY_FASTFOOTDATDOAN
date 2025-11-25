@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- HOME -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.app.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home" />
+
+    <!-- LOGIN -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.app.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_forgotFragment"
+            app:destination="@id/forgotFragment" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_otpVerifyFragment"
+            app:destination="@id/otpVerifyFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <!-- FORGOT PASSWORD -->
+    <fragment
+        android:id="@+id/forgotFragment"
+        android:name="com.example.app.ForgotFragment"
+        android:label="@string/forgot_fragment_label"
+        tools:layout="@layout/fragment_forgot">
+        <action
+            android:id="@+id/action_forgotFragment_to_otpVerifyFragment"
+            app:destination="@id/otpVerifyFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_forgotFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- REGISTER -->
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.app.RegisterFragment"
+        android:label="@string/register_fragment_label"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_registerFragment_to_otpVerifyFragment"
+            app:destination="@id/otpVerifyFragment"
+            app:launchSingleTop="true" />
+
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- OTP VERIFY -->
+    <fragment
+        android:id="@+id/otpVerifyFragment"
+        android:name="com.example.app.OtpVerifyFragment"
+        android:label="@string/otp_verify_fragment_label"
+        tools:layout="@layout/fragment_otp_verify">
+
+        <argument android:name="email" app:argType="string" android:defaultValue="" />
+        <argument android:name="mode" app:argType="string" android:defaultValue="register" />
+        <argument android:name="info_msg" app:argType="string" android:defaultValue="" />
+        <argument android:name="password" app:argType="string" android:defaultValue="" />
+        <argument android:name="name" app:argType="string" android:defaultValue="" />
+        <argument android:name="user_id" app:argType="string" android:defaultValue="" />
+        <argument android:name="windowSeconds" app:argType="integer" android:defaultValue="0" />
+        <argument android:name="otpRemaining" app:argType="string" android:defaultValue="" />
+        <argument android:name="otpLimit" app:argType="string" android:defaultValue="" />
+
+        <action
+            android:id="@+id/action_otpVerifyFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <!-- OTP SUCCESS -->
+    <fragment
+        android:id="@+id/otpSuccessFragment"
+        android:name="com.example.app.OtpSuccessFragment"
+        android:label="@string/otp_success_fragment_label"
+        tools:layout="@layout/fragment_otp_success" />
+
+    <!-- CHECKOUT -->
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.app.CheckoutFragment"
+        android:label="@string/checkout_fragment_label"
+        tools:layout="@layout/fragment_checkout">
+        <action
+            android:id="@+id/action_checkoutFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment"
+            app:popUpTo="@id/checkoutFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ORDER DETAIL -->
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.app.OrderDetailFragment"
+        android:label="@string/order_detail_fragment_label"
+        tools:layout="@layout/fragment_order_detail">
+        <argument android:name="orderId" app:argType="string" android:defaultValue="" />
+    </fragment>
+
+    <!-- SHIPPER DASHBOARD -->
+    <fragment
+        android:id="@+id/shipperDashboardFragment"
+        android:name="com.example.app.ShipperDashboardFragment"
+        android:label="@string/shipper_dashboard_label"
+        tools:layout="@layout/fragment_shipper_dashboard">
+        <action
+            android:id="@+id/action_shipperDashboardFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_shipperDashboardFragment_to_shipperRevenueFragment"
+            app:destination="@id/shipperRevenueFragment" />
+        <action
+            android:id="@+id/action_shipperDashboardFragment_to_shipperProfileFragment"
+            app:destination="@id/shipperProfileFragment" />
+    </fragment>
+
+    <!-- SHIPPER REVENUE -->
+    <fragment
+        android:id="@+id/shipperRevenueFragment"
+        android:name="com.example.app.ShipperRevenueFragment"
+        android:label="Doanh thu shipper"
+        tools:layout="@layout/fragment_shipper_revenue" />
+
+    <!-- SHIPPER PROFILE -->
+    <fragment
+        android:id="@+id/shipperProfileFragment"
+        android:name="com.example.app.ShipperProfileFragment"
+        android:label="Hồ sơ shipper"
+        tools:layout="@layout/fragment_shipper_profile" />
+
+    <!-- MERCHANT HOME -->
+    <fragment
+        android:id="@+id/merchantHomeFragment"
+        android:name="com.example.app.MerchantHomeFragment"
+        android:label="@string/merchant_home_label"
+        tools:layout="@layout/fragment_merchant_home">
+        <action
+            android:id="@+id/action_merchantHomeFragment_to_merchantMenuFragment"
+            app:destination="@id/merchantMenuFragment" />
+        <action
+            android:id="@+id/action_merchantHomeFragment_to_merchantRevenueFragment"
+            app:destination="@id/merchantRevenueFragment" />
+        <action
+            android:id="@+id/action_merchantHomeFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+
+    <!-- MERCHANT MENU -->
+    <fragment
+        android:id="@+id/merchantMenuFragment"
+        android:name="com.example.app.MerchantMenuFragment"
+        android:label="Quản lý món ăn"
+        tools:layout="@layout/fragment_merchant_menu" />
+
+    <!-- MERCHANT REVENUE -->
+    <fragment
+        android:id="@+id/merchantRevenueFragment"
+        android:name="com.example.app.MerchantRevenueFragment"
+        android:label="Doanh thu"
+        tools:layout="@layout/fragment_merchant_revenue" />
+
+    <!-- CUSTOMER HOME -->
+    <fragment
+        android:id="@+id/customerHomeFragment"
+        android:name="com.example.app.CustomerHomeFragment"
+        android:label="@string/customer_home_label"
+        tools:layout="@layout/fragment_customer_home">
+
+        <action
+            android:id="@+id/action_customerHomeFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+        <action
+            android:id="@+id/action_customerHomeFragment_to_customerOrdersFragment"
+            app:destination="@id/customerOrdersFragment" />
+    </fragment>
+
+    <!-- CUSTOMER ORDERS -->
+    <fragment
+        android:id="@+id/customerOrdersFragment"
+        android:name="com.example.app.CustomerOrdersFragment"
+        android:label="@string/customer_orders_title"
+        tools:layout="@layout/fragment_customer_orders">
+        <action
+            android:id="@+id/action_customerOrdersFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+
+    <!-- ADMIN HOME -->
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.example.app.AdminHomeFragment"
+        android:label="@string/admin_home_label"
+        tools:layout="@layout/fragment_admin_home" />
+
+    <!-- 🔹 STORE DISCOVERY (list cửa hàng) -->
+    <fragment
+        android:id="@+id/storeDiscoveryFragment"
+        android:name="com.example.app.ui.customer.StoreDiscoveryFragment"
+        android:label="@string/store_discovery_label"
+        tools:layout="@layout/fragment_store_discovery">
+
+        <!-- nếu muốn dùng action sau này thì để đây, tạm thời code đang navigate bằng destination id -->
+        <action
+            android:id="@+id/action_storeDiscoveryFragment_to_restaurantDetailFragment"
+            app:destination="@id/restaurantDetailFragment" />
+    </fragment>
+
+    <!-- 🔹 RESTAURANT DETAIL (chi tiết cửa hàng) -->
+    <fragment
+        android:id="@+id/restaurantDetailFragment"
+        android:name="com.example.app.RestaurantDetailFragment"
+        android:label="@string/restaurant_detail_label"
+        tools:layout="@layout/fragment_restaurant_detail">
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+    </fragment>
+
+    <!-- GLOBAL ACTIONS (clear back stack) -->
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_shipperDashboardFragment"
+        app:destination="@id/shipperDashboardFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_merchantHomeFragment"
+        app:destination="@id/merchantHomeFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_customerHomeFragment"
+        app:destination="@id/customerHomeFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/action_global_adminHomeFragment"
+        app:destination="@id/adminHomeFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+</navigation>

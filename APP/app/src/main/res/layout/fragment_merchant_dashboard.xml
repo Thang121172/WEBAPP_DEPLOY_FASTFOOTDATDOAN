@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ff_background"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Bảng điều khiển quán"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/ff_text_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Hàng thẻ thống kê -->
+    <LinearLayout
+        android:id="@+id/layout_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Đơn hôm nay -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/ff_surface"
+            app:strokeColor="@color/ff_border"
+            app:strokeWidth="1dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.FastFood.Medium"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn hôm nay"
+                    android:textColor="@color/ff_text_secondary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_orders_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/ff_text_primary"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Doanh thu hôm nay -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:cardBackgroundColor="@color/ff_surface"
+            app:strokeColor="@color/ff_border"
+            app:strokeWidth="1dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.FastFood.Medium"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doanh thu hôm nay"
+                    android:textColor="@color/ff_text_secondary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_revenue_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 đ"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/ff_green"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Tabs header + reload button -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_stats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_reload"
+        android:layout_marginTop="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tải lại"
+        app:layout_constraintTop_toTopOf="@id/tab_status"
+        app:layout_constraintBottom_toBottomOf="@id/tab_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Pull-to-refresh + three buckets (pending / preparing / ready) -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tab_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/layout_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chưa có đơn"
+                    android:textColor="@color/ff_text_secondary" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pending"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_preparing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_ready"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

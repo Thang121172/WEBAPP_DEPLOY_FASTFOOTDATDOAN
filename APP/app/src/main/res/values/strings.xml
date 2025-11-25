@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">app</string>
+
+    <!-- Common / menu -->
+    <string name="action_settings">Cài đặt</string>
+    <string name="admin_action">Thao tác Admin</string>
+    <string name="action_label">Hành động</string>
+    <string name="ok_label">OK</string>
+    <string name="action_logout">Đăng xuất</string>
+    <string name="session_expired_toast">Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.</string>
+    <string name="session_manual_logout">Bạn đã đăng xuất.</string>
+
+    <!-- Navigation labels -->
+    <string name="home_fragment_label">Trang chủ</string>
+    <string name="login_fragment_label">Đăng nhập</string>
+    <string name="register_fragment_label">Đăng ký</string>
+    <string name="forgot_fragment_label">Quên mật khẩu</string>
+    <string name="otp_verify_fragment_label">Xác thực OTP</string>
+    <string name="otp_success_fragment_label">OTP thành công</string>
+    <string name="checkout_fragment_label">Thanh toán</string>
+    <string name="order_detail_fragment_label">Chi tiết đơn</string>
+    <string name="shipper_dashboard_label">Bảng điều khiển Shipper</string>
+    <string name="merchant_home_label">Trang chủ Merchant</string>
+    <string name="customer_home_label">Trang khách hàng</string>
+    <string name="admin_dashboard_label">Bảng điều khiển Admin</string>
+
+    <!-- ⭐️ NEW STRINGS ADDED ⭐️ -->
+    <string name="store_discovery_label">Danh sách cửa hàng</string>
+    <string name="restaurant_detail_label">Chi tiết cửa hàng</string>
+
+    <string name="next">Tiếp theo</string>
+    <string name="previous">Quay lại</string>
+
+    <!-- BACKEND BASE URL -->
+    <string name="backend_base_url">http://192.168.1.130:8000/</string>
+
+    <!-- LOGIN -->
+    <string name="err_login_fill">Vui lòng nhập đầy đủ tài khoản và mật khẩu</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="login_failed">Đăng nhập thất bại</string>
+    <string name="login_action">Đăng nhập</string>
+    <string name="account_not_verified_resending_otp">Tài khoản chưa xác thực. Đang gửi lại mã OTP...</string>
+    <string name="otp_sent_check_email_or_logs">OTP đã gửi. Vui lòng kiểm tra email hoặc logs.</string>
+    <string name="err_cannot_send_otp_auto">Không thể gửi OTP tự động. Vui lòng thử gửi thủ công.</string>
+
+    <!-- REGISTER -->
+    <string name="err_fill_fields">Vui lòng nhập đầy đủ họ tên, email, số điện thoại và mật khẩu</string>
+    <string name="err_invalid_email">Email không hợp lệ</string>
+    <string name="err_use_gmail">Vui lòng sử dụng email Gmail</string>
+    <string name="err_not_all_digits">Tài khoản hoặc mật khẩu không được toàn chữ số</string>
+    <string name="registered_otp_sent">Đã đăng ký và gửi OTP</string>
+    <string name="registered_ok">Đăng ký thành công</string>
+    <string name="err_could_not_create_user_friendly">Không thể tạo tài khoản. (Có thể email đã được sử dụng)</string>
+    <string name="err_registration_failed_friendly">Đăng ký không thành công. Lỗi không xác định từ máy chủ.</string>
+    <string name="err_connection_friendly">Không thể kết nối tới máy chủ. Vui lòng kiểm tra kết nối mạng.</string>
+    <string name="err_invalid_phone">Số điện thoại không hợp lệ</string>
+    <string name="err_unknown">Đã xảy ra lỗi không xác định</string>
+    <string name="et_fullname">Họ và tên</string>
+    <string name="et_password">Mật khẩu</string>
+    <string name="btn_register">Tạo tài khoản</string>
+    <string name="et_phone">Số điện thoại</string>
+    <string name="err_missing_password_register">Thiếu mật khẩu đăng ký. Vui lòng quay lại đăng ký.</string>
+    <string name="err_missing_role_register">Thiếu vai trò đăng ký. Vui lòng quay lại đăng ký.</string>
+    <string name="password_rule_hint">Tối thiểu 6 ký tự, không toàn số.</string>
+
+    <!-- NEW ERRORS -->
+    <string name="err_invalid_request_friendly">Yêu cầu không hợp lệ. Vui lòng kiểm tra lại dữ liệu.</string>
+    <string name="err_server_down_friendly">Máy chủ không phản hồi. Vui lòng thử lại sau.</string>
+
+    <!-- FORGOT -->
+    <string name="btn_send_reset">Gửi email đặt lại mật khẩu</string>
+    <string name="enter_email">Nhập email</string>
+    <string name="otp_sent_check_email">OTP đã gửi. Vui lòng kiểm tra email.</string>
+    <string name="otp_resend_failed">Không thể gửi lại OTP</string>
+    <string name="network_error">Lỗi mạng</string>
+
+    <!-- OTP VERIFY -->
+    <string name="otp_title_register">Xác thực email</string>
+    <string name="otp_enter_prompt">Vui lòng nhập mã OTP gửi đến email</string>
+    <string name="otp_not_received">Chưa nhận mã?</string>
+    <string name="otp_resend_button">Gửi lại OTP</string>
+    <string name="otp_resend">Gửi lại OTP</string>
+    <string name="otp_sent_to">OTP đã gửi tới: %s</string>
+    <string name="btn_verify">Xác minh</string>
+
+    <string name="btn_reset_password">Xác minh &amp; đặt lại</string>
+    <string name="reset_success">Đặt lại mật khẩu thành công. Bạn có thể đăng nhập.</string>
+
+    <string name="et_new_password">Mật khẩu mới</string>
+    <string name="et_confirm_password">Xác nhận mật khẩu</string>
+
+    <string name="err_enter_email_otp">Nhập email và mã OTP</string>
+    <string name="otp_too_many_attempts">Quá nhiều lần thử, thử lại sau 1 phút</string>
+    <string name="verify_success">Xác thực thành công</string>
+    <string name="verify_ok_please_login">Xác thực thành công. Vui lòng đăng nhập.</string>
+    <string name="err_cannot_send_otp">Không thể gửi OTP</string>
+    <string name="err_fill_reset_fields">Vui lòng điền đủ thông tin</string>
+    <string name="err_password_mismatch">Mật khẩu xác nhận không khớp</string>
+    <string name="err_cannot_reset_password">Không thể đặt lại mật khẩu</string>
+
+    <string name="otp_verify_success">Đăng ký &amp; đăng nhập thành công 🎉</string>
+    <string name="otp_reset_success">Đặt lại mật khẩu thành công. Đăng nhập lại nhé.</string>
+    <string name="otp_debug_fail">Không lấy được OTP DEV (có thể DEBUG=False).</string>
+    <string name="otp_network_error_confirm">Lỗi mạng khi xác minh OTP: %1$s</string>
+    <string name="otp_network_error_reset">Lỗi mạng khi đặt lại mật khẩu: %1$s</string>
+    <string name="otp_confirm_fail">Xác minh OTP thất bại.</string>
+    <string name="otp_reset_fail">Không đặt lại được mật khẩu.</string>
+    <string name="otp_need_email">Vui lòng nhập email.</string>
+    <string name="otp_need_code">Vui lòng nhập mã OTP.</string>
+    <string name="otp_need_password">Mật khẩu mới phải có ít nhất 6 ký tự.</string>
+
+    <string name="otp_resend_not_supported">Tính năng gửi lại OTP hiện chưa hỗ trợ.</string>
+    <string name="err_missing_user_id">Thiếu thông tin người dùng (user_id) để xác minh OTP.</string>
+    <string name="change_email">Thay email</string>
+    <string name="contact_support">Liên hệ hỗ trợ</string>
+
+    <!-- Dynamic resend & quota -->
+    <string name="otp_resend_countdown">Gửi lại trong %1$d s</string>
+    <string name="otp_quota_hint">Còn %1$d/%2$d lượt gửi trong cửa sổ thời gian</string>
+    <string name="otp_rate_limited">Bạn gửi quá nhanh. Thử lại sau %1$d giây.</string>
+
+    <!-- LoginFragment -->
+    <string name="et_email">Email</string>
+
+    <!-- HomeFragment -->
+    <string name="home_welcome">Xin chào</string>
+    <string name="home_locating">Đang xác định vị trí…</string>
+    <string name="home_recent_orders">Đơn gần đây</string>
+    <string name="home_suggestions">Gợi ý cho bạn</string>
+    <string name="home_checkout_demo">Thanh toán demo</string>
+
+    <!-- Item Menu -->
+    <string name="add_to_cart">Thêm</string>
+
+    <!-- CheckoutFragment / Layout -->
+    <string name="checkout_address_hint">Địa chỉ giao hàng</string>
+    <string name="checkout_payment_method">Phương thức thanh toán</string>
+    <string name="checkout_payment_cod">COD</string>
+    <string name="checkout_payment_qr">QR</string>
+    <string name="checkout_payment_card">Thẻ</string>
+    <string name="checkout_subtotal">Tạm tính</string>
+    <string name="checkout_shipping">Phí giao hàng</string>
+    <string name="checkout_total">Tổng cộng</string>
+    <string name="checkout_place_order">Đặt hàng</string>
+
+    <!-- Order Detail -->
+    <string name="order_detail_title">Chi tiết đơn hàng</string>
+    <string name="order_id_label">ID Đơn hàng:</string>
+    <string name="order_status_label">Trạng thái đơn hàng</string>
+    <string name="order_status_pending">Đang chờ xác nhận</string>
+    <string name="order_detail_description">Cảm ơn bạn đã đặt hàng! Chúng tôi đang xử lý đơn hàng của bạn.</string>
+    <string name="order_detail_shipping_info">Thông tin giao hàng</string>
+    <string name="order_detail_items">Các món đã đặt</string>
+    <string name="order_detail_items_placeholder">1x Cơm gà xối mỡ (45,000đ)
+2x Trà đào cam sả (50,000đ)
+...</string>
+    <string name="order_detail_back_home">Quay về Trang chủ</string>
+
+    <!-- Misc -->
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</string>
+    <string name="role_label">Vai trò</string>
+    <string name="btn_send_otp">Gửi OTP</string>
+
+    <!-- Used across Merchant/Customer Home -->
+    <string name="home_refresh_label">Tải lại</string>
+    <string name="home_nothing_here">Chưa có dữ liệu</string>
+
+    <!-- Content descriptions -->
+    <string name="status_icon_content_desc">Biểu tượng trạng thái</string>
+    <string name="order_cancel">Từ chối</string>
+    <string name="order_track">Theo dõi</string>
+    <string name="order_reorder">Đặt lại</string>
+
+    <string name="admin_home_label">Trang admin</string>
+
+    <!-- Common errors / labels -->
+    <string name="err_enter_address">Vui lòng nhập địa chỉ giao hàng</string>
+    <string name="err_cannot_place_order">Không thể đặt đơn lúc này</string>
+    <string name="order_placed">Đã tạo đơn</string>
+    <string name="my_orders">Đơn hàng của bạn</string>
+    <string name="customer_orders_title">Đơn hàng của tôi</string>
+    <string name="no_orders">Chưa có đơn hàng nào</string>
+    <string name="no_order">Không tìm thấy đơn</string>
+    <string name="total_label">Tổng</string>
+    <string name="address_label">Địa chỉ</string>
+    <string name="err_cannot_show_order_detail">Không hiển thị được chi tiết đơn</string>
+    <string name="err_cannot_fetch_order">Không tải được đơn hàng</string>
+    <string name="no_shipper_location">Chưa có vị trí shipper</string>
+    <string name="cannot_open_maps">Không mở được bản đồ</string>
+
+    <string name="status_label">Trạng thái:</string>
+    <string name="shipper_label">Thông tin shipper:</string>
+    <string name="open_in_maps">Mở bản đồ</string>
+
+    <string name="otp_success_cd">Xác minh thành công</string>
+    <string name="otp_success_title">Xác minh thành công</string>
+    <string name="otp_success_hint">Bạn có thể đăng nhập bằng tài khoản vừa xác thực.</string>
+    <string name="otp_success_go_login">Đến Đăng nhập</string>
+
+</resources>

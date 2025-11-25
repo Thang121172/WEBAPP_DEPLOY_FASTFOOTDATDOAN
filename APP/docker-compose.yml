@@ -1,0 +1,120 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: ff_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fastfood}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456}
+    ports:
+      # expose DB ra host tại cổng 5433 để tránh đụng postgres local
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-fastfood}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7
+    container_name: ff_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Công cụ web quản trị DB (tùy chọn nhưng nên có)
+  adminer:
+    image: adminer:latest
+    container_name: ff_adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  backend:
+    # ⚠️ LƯU Ý: Bạn đang dùng build context ./backend -> cần có file ./backend/Dockerfile
+    # Nếu chưa có Dockerfile, bước build sẽ FAIL. (Mình sẽ cung cấp Dockerfile ở "file kế tiếp" khi bạn bảo.)
+    build:
+      context: ./backend
+    container_name: ff_backend
+    working_dir: /usr/src/app
+    env_file:
+      - .env
+    environment:
+      # ---- DB connection for Node app ----
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-fastfood}
+      DB_USER: ${POSTGRES_USER:-app}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-123456}
+
+      # ---- JWT / admin bootstrap ----
+      JWT_SECRET: ${JWT_SECRET:-supersecret}
+      ADMIN_SECRET: ${ADMIN_SECRET:-adminkey}
+
+      # ---- Redis (rate limiting OTP) ----
+      REDIS_URL: redis://redis:6379
+
+      # ---- Service port INSIDE container ----
+      PORT: 8000
+
+      # ---- Safety/dev flags ----
+      ALLOW_SMOKE_SEED: "true"
+      DEBUG_SHOW_OTP: "true"
+      DEV_TOKEN: ${DEV_TOKEN:-testtoken}
+
+      # ---- SMTP (khuyên chuyển qua .env thay vì hardcode ở compose) ----
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SMTP_FROM: ${SMTP_FROM:-no-reply@fastfood.local}
+
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+    ports:
+      # host:container - Dùng port 8001 để tránh conflict với WEB backend (8000)
+      - "8001:8000"
+
+    # Chạy migrate trước rồi start server
+    command: sh -c "npm run migrate && node index.js"
+
+    restart: unless-stopped
+
+  cleanup:
+    image: node:20
+    container_name: ff_cleanup
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-fastfood}
+      DB_USER: ${POSTGRES_USER:-app}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-123456}
+    command: sh -c "node scripts/cleanup_revoked.js"
+    restart: "no"  # job 1 lần; có thể dùng cron riêng nếu cần
+
+volumes:
+  db_data:

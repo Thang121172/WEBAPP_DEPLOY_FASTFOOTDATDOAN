@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Bo tròn 12dp ở các góc -->
+    <corners android:radius="12dp" />
+    <!-- Màu nền của nút. Bạn có thể thay đổi @color/design_default_color_primary thành màu xanh lá cây đậm (ví dụ: #4CAF50) nếu bạn chưa định nghĩa màu này. -->
+    <solid android:color="@color/design_default_color_primary" />
+</shape>
