@@ -10,7 +10,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-# Đảm bảo settings module đúng
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.dev') 
+# Đảm bảo settings module đúng - sử dụng biến môi trường hoặc fallback
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ.get('DJANGO_SETTINGS_MODULE', 'core.settings.dev'))
 
 application = get_wsgi_application()
