@@ -6,6 +6,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 # QUAN TRỌNG: Sửa lỗi "App Not Ready" bằng cách dùng đường dẫn tuyệt đối (backend.<app>.views)
 from orders.views import (
@@ -44,6 +45,10 @@ urlpatterns = [
 
     # Django admin
     path("admin/", admin.site.urls),
+
+    # API Documentation
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 
     # API REST chính (orders / merchant / shipper ...)
     path("api/", include(router.urls)),

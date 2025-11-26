@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
+    "drf_spectacular",  # API documentation
 
     "django_celery_beat",
     "django_celery_results",
@@ -245,6 +246,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.AllowAny",
     ),
+    # API Schema for drf-spectacular
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # Thời gian sống token JWT
@@ -254,6 +257,18 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
+}
+
+# =========================================================
+# DRF SPECTACULAR (API Documentation)
+# =========================================================
+SPECTACULAR_SETTINGS = {
+    "TITLE": "FastFood API",
+    "DESCRIPTION": "API documentation for FastFood delivery application",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
+}
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
