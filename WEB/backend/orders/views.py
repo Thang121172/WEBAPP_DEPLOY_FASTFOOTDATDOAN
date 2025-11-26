@@ -800,9 +800,9 @@ class ShipperViewSet(viewsets.ViewSet):
                     profile = request.user.profile
                     if profile.role == 'shipper':
                         if profile.latitude and profile.longitude:
-                        lat = str(profile.latitude)
-                        lng = str(profile.longitude)
-                        print(f"📍 Lấy GPS từ profile: lat={lat}, lng={lng}")
+                            lat = str(profile.latitude)
+                            lng = str(profile.longitude)
+                            print(f"📍 Lấy GPS từ profile: lat={lat}, lng={lng}")
                         else:
                             print(f"⚠️ Shipper profile không có GPS (lat={profile.latitude}, lng={profile.longitude})")
                             # Nếu không có GPS, set lat/lng = None để hiển thị tất cả đơn
