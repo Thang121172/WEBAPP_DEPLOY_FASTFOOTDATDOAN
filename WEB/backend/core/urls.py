@@ -6,7 +6,27 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+# Import drf-spectacular with error handling
+try:
+    from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+    SPECTACULAR_AVAILABLE = True
+except ImportError as e:
+    SPECTACULAR_AVAILABLE = False
+    # Create dummy views if not available
+    class SpectacularAPIView:
+        @classmethod
+        def as_view(cls):
+            def view(request):
+                return JsonResponse({"error": "drf-spectacular not installed", "detail": str(e)}, status=503)
+            return view
+    
+    class SpectacularSwaggerView:
+        @classmethod
+        def as_view(cls, **kwargs):
+            def view(request):
+                return JsonResponse({"error": "drf-spectacular not installed", "detail": str(e)}, status=503)
+            return view
 
 # QUAN TRỌNG: Sửa lỗi "App Not Ready" bằng cách dùng đường dẫn tuyệt đối (backend.<app>.views)
 from orders.views import (
@@ -46,7 +66,9 @@ urlpatterns = [
     # Django admin
     path("admin/", admin.site.urls),
 
-    # API Documentation
+    # API Documentation (phải đặt TRƯỚC router.urls để tránh conflict)
+    # Test endpoint để debug
+    path("api/test-docs/", lambda r: JsonResponse({"status": "docs endpoint test", "available": SPECTACULAR_AVAILABLE}), name="test-docs"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 
