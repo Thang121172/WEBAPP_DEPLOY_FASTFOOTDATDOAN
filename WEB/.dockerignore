@@ -1,2 +1,76 @@
-__pycache__
-node_modules
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+docs/
+*.txt
+!requirements.txt
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Frontend build (không cần trong backend container)
+frontend/
+dist/
+
+# Scripts và config không cần thiết (giữ lại start.sh)
+*.bat
+*.ps1
+docker-compose*.yml
+Makefile
+
+# Other
+*.sql
+*.docx
+postman/
+thunder-client/
+ops/

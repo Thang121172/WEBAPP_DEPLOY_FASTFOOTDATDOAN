@@ -18,7 +18,7 @@ except RuntimeError as e:
     # Neu day la loi reentrant, ta bo qua, neu khong ta raise loi
     if "populate() isn't reentrant" not in str(e):
         raise
-    
+
 # 3. Tao ung dung Celery
 app = Celery("core")
 

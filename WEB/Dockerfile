@@ -8,30 +8,32 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=on \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=settings
+    PYTHONPATH=/app/backend
 
-# Cài đặt hệ thống và công cụ wait-for-it
+# Cài đặt hệ thống dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    git \
     libpq-dev \
     zlib1g-dev \
-    curl \
-    && curl -L https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o /usr/bin/wait-for-it \
-    && chmod +x /usr/bin/wait-for-it \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements và cài đặt
+# Copy requirements và cài đặt Python dependencies
 COPY backend/requirements.txt /app/requirements.txt
 RUN python -m pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy mã nguồn backend (nội dung backend vào /app)
-COPY backend /app/
+# Copy mã nguồn backend
+COPY backend /app/backend/
 
-# Expose port (Dùng cho môi trường local)
+# Copy script khởi động
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Tạo thư mục cho static files và media
+RUN mkdir -p /app/backend/staticfiles /app/backend/media
+
+# Expose port (Render sẽ tự động set PORT env var)
 EXPOSE 8000
 
-# Lệnh mặc định nếu không có Procfile
-CMD ["gunicorn", "wsgi:application", "--bind", "0.0.0.0:$PORT"]
+# Sử dụng script khởi động
+CMD ["/app/start.sh"]
