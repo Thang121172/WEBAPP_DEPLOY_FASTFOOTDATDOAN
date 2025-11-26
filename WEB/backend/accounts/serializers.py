@@ -260,20 +260,20 @@ class LoginSerializer(serializers.Serializer):
 
         # Tìm user trước (không cần authenticate) để kiểm tra is_active
         user = None
-            try:
+        try:
             # Tìm theo username hoặc email (case-insensitive)
             user = User.objects.filter(
                 Q(username__iexact=username_or_email) | 
                 Q(email__iexact=username_or_email)
             ).first()
-            except Exception:
-                pass
+        except Exception:
+            pass
         
         # Nếu không tìm thấy user
         if not user:
-                raise serializers.ValidationError({
-                    "detail": "Email/username không tồn tại trong hệ thống. Vui lòng kiểm tra lại hoặc đăng ký tài khoản mới."
-                })
+            raise serializers.ValidationError({
+                "detail": "Email/username không tồn tại trong hệ thống. Vui lòng kiểm tra lại hoặc đăng ký tài khoản mới."
+            })
         
         # Kiểm tra is_active TRƯỚC khi authenticate
         # Vì nếu tài khoản inactive, authenticate() sẽ luôn trả None
