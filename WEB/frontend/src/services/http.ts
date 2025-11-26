@@ -11,7 +11,7 @@ const API_BASE = import.meta.env.VITE_API_BASE || "/api";
 const api = axios.create({
   baseURL: API_BASE, // Sử dụng proxy "/api" hoặc biến môi trường
   withCredentials: false,
-  timeout: 15000,
+  timeout: 60000, // Tăng timeout lên 60s để đợi backend wake up (Render free tier)
   headers: {
     "Content-Type": "application/json",
   },
