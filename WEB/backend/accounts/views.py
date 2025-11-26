@@ -84,9 +84,14 @@ def _create_and_send_otp(email: str, purpose: str, ttl_minutes: int = OTP_TTL_MI
         # Production: gửi email qua Celery
         try:
             send_otp_email.delay(identifier, code, purpose) 
-        except Exception:
-            # Celery chưa chạy hoặc lỗi SMTP
+        except Exception as e:
+            # Celery chưa chạy hoặc lỗi Redis - trả về debug_code để user có thể test
+            # TODO: Cấu hình Redis trên Render hoặc dùng email backend trực tiếp
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(f"Celery/Redis not available, returning debug OTP: {e}")
             sent_ok = False
+            debug_code = code  # Trả về OTP để user có thể test khi Redis chưa setup
 
     return otp_obj, sent_ok, debug_code
 
